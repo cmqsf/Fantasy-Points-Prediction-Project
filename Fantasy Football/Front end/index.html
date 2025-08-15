@@ -1,0 +1,40 @@
+
+<!DOCTYPE>
+
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <title>Front end learning</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="main-elements.css">
+        <link rel="stylesheet" href="form-elements.css">
+        <link rel="stylesheet" href="buttons/buttonElements.css">
+        
+    </head>
+
+    <body class="dark-mode">
+        <header>
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24">
+                    <circle id="sun" cx="12" cy="12" r="5" fill="white"/>
+                    <path id="moon" d="M 16 12 A 5 5 0 1 1 12 7 A 4 4 0 0 0 16 12 Z" fill="black" opacity="0"/>
+                </svg>
+            </button>
+            <h1>FE Project</h1>
+        </header>
+
+        <p>Trying to learn how to build simple front-end applications with JavaScript, HTML, and CSS (without using React).</p>
+        <p>Goal is to connect to backend code.</p>
+
+        <input type="text" id="userInput" placeholder="Enter player name">
+
+        <script src="/buttons/calculateButton.js" defer></script>
+    </body>
+</html>
