@@ -8,7 +8,17 @@ from fastapi import FastAPI, HTTPException
 import uvicorn
 from predictMethods import *
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or ["http://localhost:3000"] for more security
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 rd.seed(23232301)
 
 # Load data
@@ -23,6 +33,9 @@ stats = cleanStats([ff24, ff23, ff22, ff21])
 @app.get("/predict")
 async def getPredictions(player: str): 
     try:  
+        if stats is None: 
+            raise HTTPException(status_code=404, detail="Not found")
+        
         player_stats = stats[stats["player"] == player]
 
         if player_stats.empty:
@@ -46,12 +59,13 @@ async def getPredictions(player: str):
                 tes = tightEnds(stats)
                 ypred = getPredictedFantasyPoints(tes, player, 170)
             """
-
-            total_low = round(min(ypred), 2)
-            total_high = round(max(ypred), 2)
-            avg_low = round(total_low/14, 2)
-            avg_high = round(total_high/14, 2)
-
+            if ypred is None: 
+                raise HTTPException(status_code=404, detail="Prediction failed")
+            else:
+                total_low = round(min(ypred), 2)
+                total_high = round(max(ypred), 2)
+                avg_low = round(total_low/14, 2)
+                avg_high = round(total_high/14, 2)
 
         return {
             'totalPoints': {
@@ -73,4 +87,7 @@ async def getPredictions(player: str):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='0.0.0.0', port=8000)
+    try: 
+        uvicorn.run(app, host='0.0.0.0', port=8000)
+    except Exception as Argument: 
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {Argument}")
