@@ -1,0 +1,22 @@
+
+#predictForUser input {
+    text-align: center;
+    width: 120px;
+    background-color: #282828;
+    color: #494961;
+}
+
+::placeholder {
+    text-align: center;
+    color: #3c3c50;
+}
+
+input:placeholder-shown {
+    text-align: center;
+    color: #3c3c50;
+}
+
+#introduction, #predictForUser {
+    max-width: 600px;
+    text-align: center;
+  }
