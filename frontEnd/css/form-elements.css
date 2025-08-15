@@ -3,17 +3,17 @@
     text-align: center;
     width: 120px;
     background-color: #282828;
-    color: #494961;
+    color: #bb86fc;
 }
 
 ::placeholder {
     text-align: center;
-    color: #3c3c50;
+    color: #9881b3;
 }
 
 input:placeholder-shown {
     text-align: center;
-    color: #3c3c50;
+    color: #9881b3;
 }
 
 #introduction, #predictForUser {
