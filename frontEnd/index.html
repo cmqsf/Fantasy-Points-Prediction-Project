@@ -15,8 +15,9 @@
         
         <link rel="stylesheet" href="css/main-elements.css">
         <link rel="stylesheet" href="css/form-elements.css">
-        <link rel="stylesheet" href="css/buttonElements.css">
+        <link rel="stylesheet" href="css/button-elements.css">
         <link rel="stylesheet" href="css/header-elements.css">
+        <link rel="stylesheet" href="css/player-stats.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -28,47 +29,50 @@
     <body class="dark-mode">
         <header>
             <div class="header-left"></div>
-            <h1>Predict Fantasy Performance</h1>
+            <a href="/" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <h1 id="home-header">Predict Fantasy Performance</h1>
+            </a>            
+            <img src="u can beat us with 8.png" alt="U Can Beat Us With 8" height="75"/>
             <button id="theme-toggle" aria-label="Toggle theme">
                 <svg id="light-theme-icon" width="24" height="24" viewBox="0 0 24 24">
-                    <circle id="sun" cx="12" cy="12" r="5" fill="#bb86fc"/>
-                    <line x1="12" y1="0"  x2="12" y2="4"  stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="12" y1="20" x2="12" y2="24" stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="0"  y1="12" x2="4"  y2="12" stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="20" y1="12" x2="24" y2="12" stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="4"  y1="4"  x2="6"  y2="6"  stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="18" y1="18" x2="20" y2="20" stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="4"  y1="20" x2="6"  y2="18" stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
-                    <line x1="18" y1="6"  x2="20" y2="4"  stroke="#bb86fc" stroke-width="2" stroke-linecap="round"/>
+                    <circle id="sun" cx="12" cy="12" r="5" fill="#399247"/>
+                    <line x1="12" y1="0"  x2="12" y2="4"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="20" x2="12" y2="24" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="0"  y1="12" x2="4"  y2="12" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="20" y1="12" x2="24" y2="12" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4"  y1="4"  x2="6"  y2="6"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18" y1="18" x2="20" y2="20" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4"  y1="20" x2="6"  y2="18" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18" y1="6"  x2="20" y2="4"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
                     <path id="moon" d="M 16 12 A 5 5 0 1 1 12 7 A 4 4 0 0 0 16 12 Z" fill="black" opacity="0"/>
                 </svg>
             </button>
             <section class="rankings">
                 <div id="qb_rankings">
-                    <p>QB Rankings</p>
+                    <button><strong>QB Rankings</strong></button>
                 </div>
                 <div id="rb_rankings">
-                    <p>RB Rankings</p>
+                    <button><strong>RB Rankings</strong></button>
                 </div>
                 <div id="wr_rankings">
-                    <p>WR Rankings</p>
+                    <button><strong>WR Rankings</strong></button>
                 </div>
                 <div id="te_rankings">
-                    <p>TE Rankings</p>
+                    <button><strong>TE Rankings</strong></button>
                 </div>
             </section>
         </header>
 
         <main>
-            <div id="introduction">
-                <p>Trying to learn how to build simple front-end applications with JavaScript, HTML, and CSS (without using React).</p>
-                <p>Goal is to connect to backend code.</p>
-            </div>
 
             <div id="predictForUser">
                 <input type="text" id="userInput" placeholder="Enter player name">
-                <script src="/buttons/calculateButton.js" defer></script>
+                <div>
+                    <script src="/buttons/calculateButton.js" defer></script>
+                </div>
             </div>   
+            <div id="results"></div>
+
         </main>  
         
     </body>

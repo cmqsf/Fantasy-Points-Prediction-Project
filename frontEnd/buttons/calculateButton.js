@@ -30,7 +30,32 @@ calcButton.addEventListener("click", () =>
             .then(data => 
                 {
                     console.log("API response: ", data);
-                    alert("Success!");
+
+                    const resultsContainer = document.getElementById("results");
+                    if (!resultsContainer) {
+                        throw new Error("No element with id 'results' found in DOM");
+                    }
+
+                    resultsContainer.innerHTML = `
+                        <div class="player-results">
+                            <div class="player-header">
+                                <h2 class="player-name">${data.playerStats.player}</h2>
+                                <p class="player-position"><em>${data.playerStats.position}</em></p>
+                            </div>
+                            <div class="player-predictions">
+                                <div id="total-points">
+                                    <h3 class="total-points-header">Total Points</h3>
+                                    <p>Average: <strong><em>${data.totalPoints.average}</em></strong></p>
+                                    <p>Range: <strong><em>${data.totalPoints.low}-${data.totalPoints.high}</em></strong></p>
+                                </div>
+                                <div id="weekly-points">
+                                    <h3 class="weekly-points-header">Weekly Points</h3>
+                                    <p>Average: <strong><em>${data.pointsPerWeek.average}</em></strong></p>
+                                    <p>Range: <strong><em>${data.pointsPerWeek.low}-${data.pointsPerWeek.high}</em></strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
                 }
             )
             .catch(error => 
@@ -42,4 +67,4 @@ calcButton.addEventListener("click", () =>
     }
 ); 
 
-document.body.appendChild(calcButton);
+document.getElementById("predictForUser").appendChild(calcButton);

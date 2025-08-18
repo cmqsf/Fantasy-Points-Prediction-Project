@@ -4,7 +4,7 @@ p {
     font-size: 22px;
     font-weight: 400; 
     font-style: bold; 
-    color: #bb86fc;
+    color: #399247;
 }
 
 body {
@@ -12,21 +12,53 @@ body {
     display: flex;
     flex-direction: column; /* stack items vertically */
     height: 100vh;           /* take up full viewport height */
-    margin: 0;
     align-items: center;   
-    gap: 20px;   
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 body.light-mode {
-    background-color: #dcc2fc; 
+    background-color: #d5ffe1; 
     color: #141414;
 }
 
 main {
-    margin-top: 80px; /* adjust this to match your header height */
+    margin-top: 10px; /* adjust this to match your header height */
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px; /* space between the divs */
 }
 
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.player-name {
+    font-size: 24px; 
+    font-weight: bold;
+    margin: 0;
+    color: #399247;
+    font-family: 'Racing Sans One', sans-serif;
+}
+
+.player-position {
+    font-size: 18px;
+    margin: 0;
+    color: #6dd58c; 
+    font-family: 'Gruppo', sans-serif;
+}
+
+.player-predictions-avg {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: auto;
+}

@@ -64,6 +64,8 @@ def cleanStats(partial_stats):
                                     'FDPt', 
                                     'VBD',  
                                     '-9999'], axis = 1)
+
+        stats['player'] = stats['player'].str.replace(r'[*+]', '', regex=True).str.strip()
         
         return stats
     
@@ -170,10 +172,16 @@ def getPredictedFantasyPoints(stats, player, estimators):
         model.fit(x_train, y_train.values.ravel())
 
         y_pred = model.predict(x_test)
-        ypred = [round(y_pred[0], 2), round(y_pred[1], 2)]
+        if y_pred is not None:
+            if len(y_pred) == 1: 
+                ypred = [round(y_pred[0], 2), round(y_pred[0], 2)]
+            else:
+                ypred = [round(y_pred[0], 2), round(y_pred[1], 2)]
+        else:
+            return None
 
-        print(f"Prediction range: between {round(y_pred[0], 2)} and {round(y_pred[1], 2)} total points")
-        print(f"Prediction average per week: between {round(y_pred[0]/14, 2)} and {round(y_pred[1]/14, 2)} points per week")
+        #print(f"Prediction range: between {round(y_pred[0], 2)} and {round(y_pred[1], 2)} total points")
+        #print(f"Prediction average per week: between {round(y_pred[0]/14, 2)} and {round(y_pred[1]/14, 2)} points per week")
         
         return ypred
     

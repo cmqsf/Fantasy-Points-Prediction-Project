@@ -1,0 +1,36 @@
+.player-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.player-name {
+    font-size: 24px; 
+    font-weight: bold;
+    margin: 0;
+    color: #399247;
+    font-family: 'Racing Sans One', sans-serif;
+}
+
+.player-position {
+    font-size: 18px;
+    margin: 0;
+    color: #6dd58c; 
+    font-family: 'Gruppo', sans-serif;
+}
+
+.player-predictions {
+    display: flex;
+    align-items: center;
+    width: auto;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.player-predictions h3 {
+    font-family: 'Racing Sans One', sans-serif;
+    font-size: 18px;
+    color: #399247;
+}
