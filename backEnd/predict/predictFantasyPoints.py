@@ -10,7 +10,7 @@ import statistics
 
 from fastapi import FastAPI, HTTPException, APIRouter
 import uvicorn
-from predictMethods import *
+from predict.predictMethods import *
 
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
