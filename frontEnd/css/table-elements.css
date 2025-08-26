@@ -1,0 +1,26 @@
+
+.rankingsTable thead {
+    font-size: 24px; 
+    margin: 0;
+    color: #399247;
+    font-family: 'Racing Sans One', sans-serif;
+}
+
+.rankingsTable {
+    font-family: 'Gruppo', sans-serif;
+    font-size: 22px;
+    font-weight: normal;
+    color: #5fc26e;
+}
+
+.rankingsTable .players_list {
+    font-size: 22px;
+    font-weight: bold;
+    color: #399247;
+}
+
+.rankingsTable .mean_pts {
+    font-size: 22px;
+    font-weight: bold;
+    color: #399247;
+}
