@@ -28,8 +28,7 @@ async def router_lifespan(app: APIRouter):
 router = APIRouter(lifespan=router_lifespan)
 router.mount("/frontEnd/css", StaticFiles(directory="frontEnd/css"), name="static")
 
-@router.get("/qb-rankings", response_class = JSONResponse)
-def get_qb_rankings():
+def generate_qb_rankings():
     primary_qb_rankings = pd.read_csv("data/qb_rankings.csv")
     secondary_qb_rankings = pd.read_csv("data/secondary_qb_rankings.csv")
 
@@ -42,4 +41,13 @@ def get_qb_rankings():
     merged_qb_rankings = merged_qb_rankings.sort_values(by='Mean', ascending=False)
     merged_qb_rankings = merged_qb_rankings.drop(columns=['Unnamed: 0_x', 'Unnamed: 0_y'])
 
+    merged_qb_rankings['drafted'] = False
+    merged_qb_rankings.to_csv('data/merged_qb_rankings.csv')
+
+generate_qb_rankings()
+
+@router.get("/qb-rankings", response_class = JSONResponse)
+def get_qb_rankings():
+    merged = pd.read_csv("data/merged_qb_rankings.csv")
+    
     return merged_qb_rankings.to_dict(orient="records")
