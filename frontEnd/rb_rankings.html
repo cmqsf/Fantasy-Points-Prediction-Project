@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <title>QB Rankings</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="css/main-elements.css">
+        <link rel="stylesheet" href="css/form-elements.css">
+        <link rel="stylesheet" href="css/button-elements.css">
+        <link rel="stylesheet" href="css/header-elements.css">
+        <link rel="stylesheet" href="css/player-stats.css">
+        <link rel="stylesheet" href="css/table-elements.css">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        
+    </head>
+    <body>
+        <header>
+            <div class="header-left"></div>
+            <a href="/" style="text-decoration: none; color: inherit; cursor: pointer;">
+                <h1 id="home-header">Predict Fantasy Performance</h1>
+            </a>            
+            <img src="u-can-beat-us-with-8.png" alt="U Can Beat Us With 8" height="75">
+            <button id="theme-toggle" aria-label="Toggle theme">
+                <svg id="light-theme-icon" width="24" height="24" viewBox="0 0 24 24">
+                    <circle id="sun" cx="12" cy="12" r="5" fill="#399247"/>
+                    <line x1="12" y1="0"  x2="12" y2="4"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="20" x2="12" y2="24" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="0"  y1="12" x2="4"  y2="12" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="20" y1="12" x2="24" y2="12" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4"  y1="4"  x2="6"  y2="6"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18" y1="18" x2="20" y2="20" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4"  y1="20" x2="6"  y2="18" stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18" y1="6"  x2="20" y2="4"  stroke="#399247" stroke-width="2" stroke-linecap="round"/>
+                    <path id="moon" d="M 16 12 A 5 5 0 1 1 12 7 A 4 4 0 0 0 16 12 Z" fill="black" opacity="0"/>
+                </svg>
+            </button>
+            <section class="rankings">
+                <div id="qb_rankings">
+                    <button onclick="window.location.href='qb_rankings.html'">
+                        <strong>QB Rankings</strong>
+                    </button>
+                </div>
+                <div id="rb_rankings">
+                    <button onclick="window.location.href='rb_rankings.html'">
+                        <strong>RB Rankings</strong>
+                    </button>
+                </div>
+                <div id="wr_rankings">
+                    <button><strong>WR Rankings</strong></button>
+                </div>
+                <div id="te_rankings">
+                    <button><strong>TE Rankings</strong></button>
+                </div>
+            </section>
+        </header>
+        <h2>RB Rankings</h2>
+        <table class="rankingsTable" id="rb-rankings-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="players_list">RB</th>
+                    <th>Method 1</th>
+                    <th>Method 2</th>
+                    <th class="mean_pts">Mean</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            async function loadRBRankings() {
+                const response = await fetch("http://127.0.0.1:8000/rb-rankings");
+                console.log(response)
+                const data = await response.json();
+
+                const table_body = document.querySelector("#rb-rankings-table tbody");
+                table_body.innerHTML = ""
+
+                data.forEach((row, index) => {
+                    console.log("Row data:", row);
+                    const table_row = document.createElement("tr");
+                    table_row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${row.RB}</td>
+                        <td>${row.M1_Points}</td>
+                        <td>${row.M2_Points}</td>
+                        <td>${row.Mean}</td>
+                    `;
+                    table_body.append(table_row);
+                });
+            }
+
+            loadRBRankings();
+        </script>
+    </body>
+</html>
