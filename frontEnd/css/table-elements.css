@@ -7,20 +7,28 @@
 }
 
 .rankingsTable {
-    display: table-row;
+    border-collapse: collapse;
     font-weight: normal;
     color: #5fc26e;
 }
 
-.rankingsTable th {
-    width: 100%;
+.rankingsTable thead {
+    font-size: 22px;
+    margin: 0;
+    color: #399247;
+    font-family: 'Racing Sans One', sans-serif;
+}
+
+.rankingsTable th,
+.rankingsTable td {
+    text-align: left;
     padding: 0.5rem 1.5rem;
 }
 
 .rankingsTable tbody {
     font-family: 'Gruppo', sans-serif;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: normal;
     color: #5fc26e;
 }
 
