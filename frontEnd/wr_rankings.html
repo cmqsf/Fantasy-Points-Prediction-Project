@@ -3,7 +3,7 @@
     <head>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title>QB Rankings</title>
+        <title>WR Rankings</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
@@ -68,12 +68,12 @@
                 </div>
             </section>
         </header>
-        <h2>QB Rankings</h2>
-        <table class="rankingsTable" id="qb-rankings-table">
+        <h2>WR Rankings</h2>
+        <table class="rankingsTable" id="wr-rankings-table">
             <thead>
                 <tr>
                     <th></th>
-                    <th class="players_list">QB</th>
+                    <th class="players_list">WR</th>
                     <th>Method 1</th>
                     <th>Method 2</th>
                     <th class="mean_pts">Mean</th>
@@ -82,12 +82,12 @@
             <tbody></tbody>
         </table>
         <script>
-            async function loadQBRankings() {
-                const response = await fetch("http://127.0.0.1:8000/qb-rankings");
+            async function loadWRRankings() {
+                const response = await fetch("http://127.0.0.1:8000/wr-rankings");
                 console.log(response)
                 const data = await response.json();
 
-                const table_body = document.querySelector("#qb-rankings-table tbody");
+                const table_body = document.querySelector("#wr-rankings-table tbody");
                 table_body.innerHTML = ""
 
                 data.forEach((row, index) => {
@@ -95,7 +95,7 @@
                     const table_row = document.createElement("tr")
                     table_row.innerHTML = `
                         <td>${index+1}</td>
-                        <td>${row.QB}</td>
+                        <td>${row.WR}</td>
                         <td>${row.M1_Points}</td>
                         <td>${row.M2_Points}</td>
                         <td>${row.Mean}</td>
@@ -104,7 +104,7 @@
                 });
             }
 
-            loadQBRankings();
+            loadWRRankings();
         </script>
     </body>
 </html>
