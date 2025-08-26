@@ -1,11 +1,9 @@
-
-<!DOCTYPE>
-
-<html lang = "en">
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title>Front end learning</title>
+        <title>QB Rankings</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
@@ -13,11 +11,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="/css/main-elements.css">
-        <link rel="stylesheet" href="/css/form-elements.css">
-        <link rel="stylesheet" href="/css/button-elements.css">
-        <link rel="stylesheet" href="/css/header-elements.css">
-        <link rel="stylesheet" href="/css/player-stats.css">
+        <link rel="stylesheet" href="css/main-elements.css">
+        <link rel="stylesheet" href="css/form-elements.css">
+        <link rel="stylesheet" href="css/button-elements.css">
+        <link rel="stylesheet" href="css/header-elements.css">
+        <link rel="stylesheet" href="css/player-stats.css">
+        <link rel="stylesheet" href="css/table-elements.css">
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,8 +24,7 @@
         <link rel="manifest" href="/site.webmanifest">
         
     </head>
-
-    <body class="dark-mode">
+    <body>
         <header>
             <div class="header-left"></div>
             <a href="/" style="text-decoration: none; color: inherit; cursor: pointer;">
@@ -49,7 +47,7 @@
             </button>
             <section class="rankings">
                 <div id="qb_rankings">
-                    <button onclick="window.location.href='qb_rankings.html'">
+                    <button onclick="window.location.href='rankings/qb_rankings.html'" src="qb_rankings.html">
                         <strong>QB Rankings</strong>
                     </button>
                 </div>
@@ -64,18 +62,35 @@
                 </div>
             </section>
         </header>
+        <h2>QB Rankings</h2>
+        <table class="rangkingsTable">
+            <thead>
+                <tr>
+                    <th class="players_list">QB</th>
+                    <th>Method 1 Points</th>
+                    <th>Method 2 Points</th>
+                    <th class="mean_pts">Mean Points</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <script>
+            async function loadQBRankings() {
+                const response = await fetch("http://127.0.0.1:8000/qb-rankings");
+                console.log(response)
+                const data = await response.json();
 
-        <main>
+                const table_body = document.querySelector("#qb-rankings-table tbody");
+                table_body.innerHTML = ""
 
-            <div id="predictForUser">
-                <input type="text" id="userInput" placeholder="Enter player name">
-                <div>
-                    <script src="/buttons/calculateButton.js" defer></script>
-                </div>
-            </div>   
-            <div id="results"></div>
+                data.forEach(row => {
+                    const table_row = document.createElement("tr")
+                    table_row.innerHTML = `<td>${row.QB}</td><td>${row.M1_Points}</td><td>${row.M2_Points}</td><td>${row.Mean}</td>`
+                    table_body.append(table_row)
+                });
+            }
 
-        </main>  
-        
+            loadQBRankings();
+        </script>
     </body>
 </html>
