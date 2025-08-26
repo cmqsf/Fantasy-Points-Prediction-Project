@@ -8,6 +8,8 @@ import os
 import logging
 import statistics
 
+import logging
+
 from fastapi import FastAPI, HTTPException, APIRouter
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +17,8 @@ import uvicorn
 
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def router_lifespan(app: APIRouter):
@@ -29,25 +33,35 @@ router = APIRouter(lifespan=router_lifespan)
 router.mount("/frontEnd/css", StaticFiles(directory="frontEnd/css"), name="static")
 
 def generate_qb_rankings():
-    primary_qb_rankings = pd.read_csv("data/qb_rankings.csv")
-    secondary_qb_rankings = pd.read_csv("data/secondary_qb_rankings.csv")
 
-    merged_qb_rankings = pd.merge(primary_qb_rankings, secondary_qb_rankings, on='QB')
-    merged_qb_rankings['Mean'] = round((merged_qb_rankings['Points_x'] + merged_qb_rankings['Points_y'])/2, 2)
-    merged_qb_rankings = merged_qb_rankings.rename(columns = {
-        'Points_x': 'M1_Points',
-        'Points_y': 'M2_Points'
-    })
-    merged_qb_rankings = merged_qb_rankings.sort_values(by='Mean', ascending=False)
-    merged_qb_rankings = merged_qb_rankings.drop(columns=['Unnamed: 0_x', 'Unnamed: 0_y'])
+    try: 
+        primary_qb_rankings = pd.read_csv("data/qb_rankings.csv")
+        secondary_qb_rankings = pd.read_csv("data/secondary_qb_rankings.csv")
 
-    merged_qb_rankings['drafted'] = False
-    merged_qb_rankings.to_csv('data/merged_qb_rankings.csv')
+        merged_qb_rankings = pd.merge(primary_qb_rankings, secondary_qb_rankings, on='QB')
+        merged_qb_rankings['Mean'] = round((merged_qb_rankings['Points_x'] + merged_qb_rankings['Points_y'])/2, 2)
+        merged_qb_rankings = merged_qb_rankings.rename(columns = {
+            'Points_x': 'M1_Points',
+            'Points_y': 'M2_Points'
+        })
+        merged_qb_rankings = merged_qb_rankings.sort_values(by='Mean', ascending=False)
+        merged_qb_rankings = merged_qb_rankings.drop(columns=['Unnamed: 0_x', 'Unnamed: 0_y'])
+
+        merged_qb_rankings['drafted'] = False
+        merged_qb_rankings.to_csv('data/merged_qb_rankings.csv')
+
+    except Exception as e: 
+        logger.error(f"Error in generate_qb_rankings: {e}")
 
 generate_qb_rankings()
 
 @router.get("/qb-rankings", response_class = JSONResponse)
 def get_qb_rankings():
-    merged = pd.read_csv("data/merged_qb_rankings.csv")
-    
-    return merged_qb_rankings.to_dict(orient="records")
+    try: 
+        merged = pd.read_csv("data/merged_qb_rankings.csv")
+
+        return merged_qb_rankings.to_dict(orient="records")
+
+    except Exception as e: 
+        logger.error(f"Error in get_qb_rankings: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
