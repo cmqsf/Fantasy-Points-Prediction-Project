@@ -34,7 +34,7 @@ def get_qb_rankings():
     secondary_qb_rankings = pd.read_csv("data/secondary_qb_rankings.csv")
 
     merged_qb_rankings = pd.merge(primary_qb_rankings, secondary_qb_rankings, on='QB')
-    merged_qb_rankings['Mean'] = (merged_qb_rankings['Points_x'] + merged_qb_rankings['Points_y'])/2
+    merged_qb_rankings['Mean'] = round((merged_qb_rankings['Points_x'] + merged_qb_rankings['Points_y'])/2, 2)
     merged_qb_rankings = merged_qb_rankings.rename(columns = {
         'Points_x': 'M1_Points',
         'Points_y': 'M2_Points'
