@@ -63,7 +63,7 @@
             </section>
         </header>
         <h2>QB Rankings</h2>
-        <table class="rangkingsTable">
+        <table class="rankingsTable" id="qb-rankings-table">
             <thead>
                 <tr>
                     <th class="players_list">QB</th>
@@ -84,6 +84,7 @@
                 table_body.innerHTML = ""
 
                 data.forEach(row => {
+                    console.log("Row data:", row);
                     const table_row = document.createElement("tr")
                     table_row.innerHTML = `<td>${row.QB}</td><td>${row.M1_Points}</td><td>${row.M2_Points}</td><td>${row.Mean}</td>`
                     table_body.append(table_row)
