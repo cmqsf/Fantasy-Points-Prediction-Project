@@ -33,6 +33,12 @@ ff21 = pd.read_csv("data/fantasyFootball2021.csv")
 # Clean data
 stats = cleanStats([ff24, ff23, ff22, ff21])
 
+def safe_mean(series):
+    val = series.mean()
+    if val is None or np.isnan(val):
+        return None
+    return round(val, 2)
+
 @router.get("/predict")
 async def getPredictions(player: str): 
     try:  
@@ -83,15 +89,15 @@ async def getPredictions(player: str):
             'playerStats': {
                 'player': player, 
                 'position': player_stats.iloc[0]['fantasy_position'],
-                'avg_games_played': player_stats['games_played'].mean(),
-                'avg_games_started': player_stats['games_started'].mean(),
-                'avg_ints': player_stats['interceptions'].mean(),
-                'avg_passing_yds': player_stats['passing_yds'].mean(),
-                'avg_rush_yds': player_stats['rush_yds'].mean(),
-                'avg_receiving_yds': player_stats['receiving_yds'].mean(), 
-                'avg_fumbles': player_stats['fumbles'].mean(),
-                'avg_total_tds': player_stats['total_tds'].mean(),
-                'avg_overall_rank': player_stats['overall_rank'].mean()
+                'avg_games_played': safe_mean(player_stats['games_played']),
+                'avg_games_started': safe_mean(player_stats['games_started']),
+                'avg_ints': safe_mean(player_stats['interceptions']),
+                'avg_passing_yds': safe_mean(player_stats['passing_yds']),
+                'avg_rush_yds': safe_mean(player_stats['rush_yds']),
+                'avg_receiving_yds': safe_mean(player_stats['receiving_yds']), 
+                'avg_fumbles': safe_mean(player_stats['fumbles']),
+                'avg_total_tds': safe_mean(player_stats['total_tds']),
+                'avg_overall_rank': safe_mean(player_stats['overall_rank'])
             }
         }
         
