@@ -5,6 +5,8 @@ import uvicorn
 from predict.predictFantasyPoints import router as getPredictions_route 
 from rankings.qb_rankings import router as getQBRankings_route
 from rankings.rb_rankings import router as getRBRankings_route
+from rankings.wr_rankings import router as getWRRankings_route
+from rankings.te_rankings import router as getTERankings_route
 
 from fastapi.middleware.cors import CORSMiddleware 
 
@@ -21,6 +23,8 @@ app.add_middleware(
 app.include_router(getPredictions_route)
 app.include_router(getQBRankings_route)
 app.include_router(getRBRankings_route)
+app.include_router(getWRRankings_route)
+app.include_router(getTERankings_route)
 
 if __name__ == "__main__":
     try: 
