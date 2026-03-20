@@ -36,7 +36,7 @@ def get_qb_rankings():
     try: 
         merged = pd.read_csv("data/merged_qb_rankings.csv")
 
-        return merged_qb_rankings.to_dict(orient="records")
+        return merged.to_dict(orient="records")
 
     except Exception as e: 
         logger.error(f"Error in get_qb_rankings: {e}")
